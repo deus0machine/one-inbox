@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Почта</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='4' width='20' height='16' rx='3' fill='%233e63dd'/%3E%3Cpath d='M4 7l8 6 8-6' stroke='white' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/style.css">
+<script>window.TOKEN = "{{TOKEN}}";</script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">Почта</div>
+    <nav id="accounts"></nav>
+    <button class="bell-btn" id="bellBtn" title="Уведомления Windows о новых письмах"></button>
+    <button class="add-btn" id="addBtn">+ Добавить ящик</button>
+  </aside>
+
+  <section class="listpane">
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Поиск по теме и отправителю">
+      <button id="refreshBtn" class="icon-btn" title="Обновить">⟳</button>
+    </div>
+    <div class="folders" id="folders"></div>
+    <div id="errors"></div>
+    <div id="list" class="list"></div>
+  </section>
+
+  <section class="reader" id="reader">
+    <div class="empty">Выбери письмо слева</div>
+  </section>
+</div>
+
+<dialog id="addDlg">
+  <form id="addForm" method="dialog" autocomplete="off">
+    <h2>Новый ящик</h2>
+    <!-- Обычные text-поля вместо email/password: так Edge не распознаёт форму входа
+         и не предлагает сохранить пароль. Точки вместо символов рисует CSS. -->
+    <label>Адрес
+      <input name="mbxaddr" type="text" inputmode="email" required placeholder="name@yandex.ru"
+             autocomplete="off" spellcheck="false">
+    </label>
+    <label>Пароль приложения
+      <input name="mbxkey" type="text" class="secret" required autocomplete="off" spellcheck="false">
+    </label>
+    <label>Название (необязательно)
+      <input name="name" placeholder="Работа, личная…" autocomplete="off">
+    </label>
+    <label id="hostRow" hidden>IMAP-сервер
+      <input name="host" placeholder="imap.example.com" autocomplete="off">
+    </label>
+    <div class="hint" id="hint"></div>
+    <div class="form-error" id="formError"></div>
+    <div class="actions">
+      <button type="button" id="cancelAdd" class="secondary">Отмена</button>
+      <button type="submit" id="submitAdd">Проверить и добавить</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
